@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Catalog</title>
+  <script src="catlog.js"></script>
+  <style>
+    body { font-family: Arial;
+         padding: 20px; 
+          }
+    .product { border: 2px solid #0b0808; 
+        padding: 20px; 
+        margin-bottom: 10px; 
+        width: 300px;
+        height:100px;
+        font-display:center ; 
+    }
+  </style>
+</head>
+<body>
+  <h1>All Products</h1>
+  <div id="products"></div>
+   
+  <script>
+    fetch('http://localhost:3000/products')
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('products');
+        data.forEach(p => {
+          const div = document.createElement('div');
+          div.className = 'product';
+          div.innerHTML = `<strong>${p.name}</strong><br>Category: ${p.category}<br>Price: $${p.price}`;
+          container.appendChild(div);
+        });
+      });
+  </script>
+</body>
+</html>
